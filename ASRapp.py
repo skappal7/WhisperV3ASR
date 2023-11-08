@@ -13,7 +13,7 @@ import requests
 API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large-v3"
 headers = {"Authorization": "Bearer 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"}
 
-st.title("Real-Time Speech-to-Text with Whisper API")
+st.title("Real-Time Speech-to-Text with Whisper Large V3")
 
 # Create a file upload widget
 audio_file = st.file_uploader("Upload an audio file (in FLAC format)")
