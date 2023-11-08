@@ -35,5 +35,5 @@ if audio_file is not None:
         else:
             st.error(f"Request failed with status code: {response.status_code}")
 
-st.write("Note: This app uses the Whisper API for speech-to-text conversion. Make sure to upload a valid FLAC audio file.")
+st.write("Note: Whisper is a pre-trained model for automatic speech recognition (ASR) and speech translation. Trained on 680k hours of labelled data, Whisper models demonstrate a strong ability to generalise to many datasets and domains without the need for fine-tuning.")
 
