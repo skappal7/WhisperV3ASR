@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
 import requests
+import nltk
+
+# Download NLTK data for sentiment analysis
+nltk.download('vader_lexicon')
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 # Set a modern color scheme
