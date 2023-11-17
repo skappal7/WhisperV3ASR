@@ -4,7 +4,11 @@ import requests
 import nltk
 
 # Download NLTK data for sentiment analysis
-nltk.download('vader_lexicon')
+try:
+    nltk.data.find('vader_lexicon')
+except LookupError:
+    nltk.download('vader_lexicon')
+
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 # Set a modern color scheme
