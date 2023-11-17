@@ -1,37 +1,18 @@
+# -*- coding: utf-8 -*-
 import streamlit as st
 import requests
-import spacy
 import langid
-
-# Set a modern color scheme
-st.set_page_config(page_title="Speech-to-Text & Text Analytics", page_icon="🎙️", layout="wide", initial_sidebar_state="collapsed")
-
-# Load spaCy models for English and Hindi
-nlp_en = spacy.load("en_core_web_sm")
-nlp_hi = spacy.load("hi_core_web_sm")
-
-# Function to identify language and perform sentiment analysis
-def analyze_sentiment_multilingual(text):
-    segments = langid.rank(text)
-    
-    sentiment_results = []
-    for segment in segments:
-        lang_code, _ = segment
-        if lang_code == 'en':
-            doc = nlp_en(text)
-        elif lang_code == 'hi':
-            doc = nlp_hi(text)
-        else:
-            doc = None
-        
-        if doc:
-            sentiment = doc.cats.get('positive', 0.0) - doc.cats.get('negative', 0.0)
-            sentiment_results.append(sentiment)
-
-    return sentiment_results
 
 API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large-v3"
 headers = {"Authorization": "Bearer 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"}
+
+# Set a modern color scheme
+st.set_page_config(page_title="Speech-to-Text Transcription Using Whisper LV3", page_icon="🎙️", layout="wide", initial_sidebar_state="collapsed")
+
+# Function to perform sentiment analysis using langid
+def analyze_language(text):
+    lang, _ = langid.rank(text)
+    return lang
 
 # Set a more modern title and subtitle
 st.title("Whisper Large V3: Real-Time Speech-to-Text & Text Analytics 🎙️")
@@ -56,15 +37,12 @@ if audio_file is not None:
                 transcribed_text = result["text"]
                 st.write(transcribed_text)
 
-                # Perform sentiment analysis for each language segment
-                sentiment_results = analyze_sentiment_multilingual(transcribed_text)
+                # Perform language identification
+                language = analyze_language(transcribed_text)
 
-                # Display sentiment analysis results
-                st.subheader("Sentiment Analysis Results:")
-                for i, sentiment in enumerate(sentiment_results):
-                    lang_code, _ = langid.rank(transcribed_text)[i]
-                    lang_name = "English" if lang_code == "en" else "Hindi"
-                    st.write(f"{lang_name} Segment {i + 1}: Sentiment Score: {sentiment:.2f}")
+                # Display language identification result
+                st.subheader("Language Identification:")
+                st.write(f"Detected Language: {language}")
 
             else:
                 st.error("Transcription failed. Check the audio file format.")
