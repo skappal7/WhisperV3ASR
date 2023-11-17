@@ -2,14 +2,14 @@ import streamlit as st
 import requests
 
 # Set the page title and icon
-st.set_page_config(page_title="Whisper ASR", page_icon="🔊", layout="centered")
+st.set_page_config(page_title="Data Dojo Whisper ASR", page_icon="🥷", layout="centered")
 
 # API details
 API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large-v3"
 headers = {"Authorization": "Bearer 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"}
 
 # Set the app title and a brief description
-st.title("Real-Time Speech-to-Text with Whisper Large V3")
+st.title("Speech to Text with Whisper Large V3 by Data Dojo 🥷")
 st.markdown("This app uses the Whisper Large V3 model for real-time automatic speech recognition (ASR). Upload an audio file in FLAC format and click the button to transcribe.")
 
 # Create a file upload widget
